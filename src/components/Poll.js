@@ -67,8 +67,7 @@ class Poll extends Component {
 
 
     return (
-      <div>
-        <div className='poll'>
+        <div className='poll mx-auto'>
           <img className='avatar' src={ author.avatarURL } alt='avatar'/>
           <div> { author.name } asks: </div>
             <strong> Would you rather ... </strong>
@@ -97,7 +96,6 @@ class Poll extends Component {
               <button disabled={ authedUserHasAnwsered }> Submit your Vote! </button>
             </form>
 
-        </div>
 
         {
           authedUserHasAnwsered && <div className='results'>

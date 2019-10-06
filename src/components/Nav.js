@@ -20,9 +20,9 @@ class Nav extends Component {
     return (
       <div>
         <nav className='navbar navbar-expand-lg navbar-light bg-light'>
-          <a className="navbar-brand" href="/"> WouldYouRather </a>
+          <Link to='/' className="navbar-brand"> WouldYouRather </Link>
 
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <div className="navbar-expand" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
               <Link to='/'>
                 <li className='nav-item active'>
@@ -45,8 +45,15 @@ class Nav extends Component {
                   </li>
               }
             </ul>
-            { authedUser !== '' && <img src={ this.props.authedUserObj.avatarURL } className="avatar" alt="avatar"/> }
+
+
           </div>
+
+          { authedUser !== '' &&
+          <Link className="navbar-brand" to='/'>
+            <img src={ this.props.authedUserObj.avatarURL } className="avatar" alt="avatar" />
+          </Link>
+          }
         </nav>
       </div>
     )

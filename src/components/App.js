@@ -27,7 +27,7 @@ class App extends Component {
   render() {
     const { loading, authedUser } = this.props
     return (
-      <div className='App'>
+      <div className='container'>
         <BrowserRouter>
           <LoadingBar/>
           <div className='Navbar'>
