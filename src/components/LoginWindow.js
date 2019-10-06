@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {setAuthedUser} from "../actions/authedUser"
+import { setAuthedUser } from "../actions/authedUser"
 
 class LoginWindow extends Component {
 
@@ -27,18 +27,17 @@ class LoginWindow extends Component {
         <div className='center'>
           <h3> Welcome to the Would You Rather App!</h3>
           <p> Please Sign in to Continue. </p>
-          <form onSubmit={ (e) => this.onLogin(e) }>
-
-            <select onChange={ (e) => this.onChangeSelectedUser(e) }>
-              <option disabled={ true } default> Please select your username. </option>
-              { Object.entries(users).map(([id, values]) => ( <option key={ id }> { id }  </option> )) }
-            </select>
-            <div className='center'>
-              <button>  Sign in  </button>
-            </div>
-          </form>
         </div>
 
+        <form onSubmit={ (e) => this.onLogin(e) }>
+          <select onChange={ (e) => this.onChangeSelectedUser(e) } className="form-control" defaultValue="blank">
+            <option disabled value="blank"> --- Please select your username. --- </option>
+            { Object.entries(users).map(([id, values]) => ( <option key={ id }> { id }  </option> )) }
+          </select>
+          <div className='center'>
+            <button className="btn btn-success">  Sign in  </button>
+          </div>
+        </form>
       </div>
     )
   }
