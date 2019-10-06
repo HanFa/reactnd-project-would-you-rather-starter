@@ -20,7 +20,7 @@ class Nav extends Component {
     return (
       <div>
         <nav className='navbar navbar-expand-lg navbar-light bg-light'>
-          <a className="navbar-brand" href="#"> WouldYouRather </a>
+          <a className="navbar-brand" href="/"> WouldYouRather </a>
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
@@ -41,9 +41,11 @@ class Nav extends Component {
               </Link>
               {
                 authedUser === '' ? null :
-                  <li className='nav-item active' onClick={ (e) => { this.onLogout(e) } }> Log out </li>
+                  <li className='nav-item active' onClick={ (e) => { this.onLogout(e) } }> Log out
+                  </li>
               }
             </ul>
+            { authedUser !== '' && <img src={ this.props.authedUserObj.avatarURL } className="avatar" alt="avatar"/> }
           </div>
         </nav>
       </div>
@@ -51,8 +53,8 @@ class Nav extends Component {
   }
 }
 
-const mapStateToProps = ({ authedUser }) => {
-  return { authedUser }
+const mapStateToProps = ({ authedUser, users }) => {
+  return { authedUser, authedUserObj: authedUser === "" ? null : users[authedUser]  }
 }
 
 export default withRouter(connect(mapStateToProps)(Nav))

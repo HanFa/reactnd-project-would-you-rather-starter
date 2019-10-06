@@ -1,12 +1,10 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from "react-router"
-import { CanvasJSChart, CanvasJS } from '../canvasjs.react'
+import { CanvasJSChart } from '../canvasjs.react'
 
 
 class Leaderboard extends Component {
-
-  chartRef = React.createRef();
 
   componentDidMount() {
     const { authedUser, history } = this.props
@@ -59,7 +57,7 @@ class Leaderboard extends Component {
           rankedUsers.map((user, idx) => (
               <div key={ user.id } className='center' >
                 <div className='container'>
-                  <img className='avatar' src={ user.avatarURL } />
+                  <img className='avatar' src={ user.avatarURL } alt="avatar" />
                   <div> { `#${ idx + 1 }: ` } { user.name  } </div>
                   <div> Question answered: { Object.keys(user.answers).length } </div>
                   <div> Question asked: { user.questions.length } </div>

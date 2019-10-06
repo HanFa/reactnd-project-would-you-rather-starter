@@ -24,11 +24,11 @@ class Question extends Component {
     return (
       <div className={ this.getCardClassNameRandomly() }>
         <div className='card-body'>
-          <img className="card-img-top" src= { author.avatarURL } alt="Card image cap"/>
+          <img className="card-img-top" src= { author.avatarURL } alt="card-avatar"/>
           <h5 className="card-title"> { authedUser === author.id ? <strong> You </strong> : author.name } asked a question:  </h5>
           <h6 className="card-subtitle"> Would you rather: </h6>
           <p className="card-text"> { `${ question.optionOne.text } vs ${ question.optionTwo.text }` } </p>
-          <a className='card-link' onClick={ (e) => onShowPollClicked(e, id) }> View Poll </a>
+          <button className='card-link' onClick={ (e) => onShowPollClicked(e, id) }> View Poll </button>
         </div>
       </div>
     )

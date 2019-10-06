@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from "react-router"
 import { handleVoteQuestion } from '../actions/questions'
-import { CanvasJSChart, CanvasJS } from '../canvasjs.react'
+import { CanvasJSChart } from '../canvasjs.react'
 
 class Poll extends Component {
 
@@ -25,7 +25,7 @@ class Poll extends Component {
 
   onOptionSubmit = (e) => {
     e.preventDefault()
-    const { dispatch, authedUser, id, history } = this.props
+    const { dispatch, authedUser, id } = this.props
     const vote = {
       authedUser, qid: id, answer: this.state.selected
     }
@@ -41,6 +41,9 @@ class Poll extends Component {
       authedUserHasAnwsered,
       authedUserVotedOptionOne,
       authedUserVotedOptionTwo } = this.props
+
+    if (question === null)
+      return <div> 404 not found </div>
 
     const votesForOptionOne = question.optionOne.votes.length
     const votesForOptionTwo = question.optionTwo.votes.length
@@ -66,7 +69,7 @@ class Poll extends Component {
     return (
       <div>
         <div className='poll'>
-          <img className='avatar' src={ author.avatarURL }/>
+          <img className='avatar' src={ author.avatarURL } alt='avatar'/>
           <div> { author.name } asks: </div>
             <strong> Would you rather ... </strong>
             <form onSubmit={ (e) => this.onOptionSubmit(e) }>
@@ -109,6 +112,10 @@ class Poll extends Component {
 const mapStateToProps = ({ questions, users, authedUser }, props) => {
   const { id } = props.match.params
   const question = questions[id]
+
+  if (question === undefined)
+    return { question: null }
+
   return {
     question,
     author: users[question.author],

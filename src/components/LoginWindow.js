@@ -16,7 +16,6 @@ class LoginWindow extends Component {
   }
 
   onChangeSelectedUser = (e) => {
-    console.log("change to ", e.target.value)
     this.setState({ selectedUserId: e.target.value })
   }
 

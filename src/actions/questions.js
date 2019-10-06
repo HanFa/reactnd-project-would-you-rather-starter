@@ -31,7 +31,6 @@ export function handleAddQuestion(question) {
   return (dispatch) => {
     dispatch(showLoading())
     return _saveQuestion(question).then((question) => {
-      console.log("Saved ", question)
       return dispatch(addQuestion(question))
     }).then(() => hideLoading())
   }
@@ -41,7 +40,6 @@ export function handleVoteQuestion(vote) {
   return (dispatch) => {
     dispatch(showLoading())
     return _saveQuestionAnswer(vote).then(() => {
-      console.log("Saved response: ", vote)
       return dispatch(voteQuestion(vote))
     }).then(() => hideLoading())
   }
