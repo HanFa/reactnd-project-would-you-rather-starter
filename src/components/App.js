@@ -12,10 +12,11 @@ import handleInitialData from "../actions/shared"
 
 import '../App.css'
 import { LoadingBar } from "react-redux-loading"
-import { BrowserRouter, Route } from 'react-router-dom'
+import { Switch, BrowserRouter, Route } from 'react-router-dom'
 import Leaderboard from "./Leaderboard"
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import NotFound from "./NotFound"
 
 class App extends Component {
 
@@ -37,12 +38,13 @@ class App extends Component {
           <div className='Content'>
             {
               loading === true ? null :
-              <Fragment>
+              <Switch>
                 <Route path='/' exact component={ authedUser === "" ? LoginWindow : Dashboard }/>
-                <Route path='/new' exact component={ NewQuestion }/>
-                <Route path='/question/:id' exact component={ Poll } />
+                <Route path='/add' exact component={ NewQuestion }/>
+                <Route path='/questions/:id' exact component={ Poll } />
                 <Route path='/leaderboard' exact component={ Leaderboard }/>
-              </Fragment>
+                <Route path='*' exact component={ NotFound }/>
+              </Switch>
             }
           </div>
         </BrowserRouter>

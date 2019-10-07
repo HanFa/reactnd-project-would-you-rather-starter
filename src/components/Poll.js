@@ -3,21 +3,14 @@ import { connect } from 'react-redux'
 import { withRouter } from "react-router"
 import { handleVoteQuestion } from '../actions/questions'
 import { CanvasJSChart } from '../canvasjs.react'
+import LoginWindow from "./LoginWindow"
+import NotFound from "./NotFound"
 
 class Poll extends Component {
 
   state = {
     selected: ""
   }
-
-  componentDidMount() {
-    const { authedUser, history } = this.props
-    if (authedUser === '') {
-      alert("Please log in first to checkout this poll!")
-      history.push('/')
-    }
-  }
-
 
   onOptionCheckedChange = (e) => {
     this.setState({ selected: e.target.value })
@@ -43,7 +36,7 @@ class Poll extends Component {
       authedUserVotedOptionTwo } = this.props
 
     if (question === null)
-      return <div> 404 not found </div>
+      return <NotFound/>
 
     const votesForOptionOne = question.optionOne.votes.length
     const votesForOptionTwo = question.optionTwo.votes.length
@@ -67,6 +60,8 @@ class Poll extends Component {
 
 
     return (
+      <LoginWindow>
+
         <div className='poll mx-auto'>
           <img className='avatar' src={ author.avatarURL } alt='avatar'/>
           <div> { author.name } asks: </div>
@@ -103,6 +98,8 @@ class Poll extends Component {
           </div>
         }
       </div>
+      </LoginWindow>
+
     )
   }
 }

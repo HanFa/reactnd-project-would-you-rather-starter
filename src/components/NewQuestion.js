@@ -4,16 +4,9 @@ import { connect } from 'react-redux'
 import { withRouter } from "react-router"
 import { generateUID } from "../utils"
 import { handleAddQuestion } from "../actions/questions"
+import LoginWindow from "./LoginWindow"
 
 class NewQuestion extends Component {
-
-  componentDidMount() {
-    const { authedUser, history } = this.props
-    if (authedUser === '') {
-      alert("Please log in first to post a new question!")
-      history.push('/')
-    }
-  }
 
   onSubmitNewQuestion = (e) => {
     e.preventDefault()
@@ -46,24 +39,26 @@ class NewQuestion extends Component {
 
   render() {
     return (
-      <div>
-        <h3 className='center'> Create New Question </h3>
-        <p> Complete the question: </p>
+      <LoginWindow>
         <div>
-          <strong> Would you rather: </strong>
-          <ul className='options'>
-            <li key='first'>
-              <input type='text' placeholder='Enter Option One Text Here' ref={ (e) => this.firstOption = e }/>
-            </li>
-            <li key='second'>
-              <input type='text' placeholder='Enter Option Two Text Here' ref={ (e) => this.secondOption = e }/>
-            </li>
-          </ul>
+          <h3 className='center'> Create New Question </h3>
+          <p> Complete the question: </p>
+          <div>
+            <strong> Would you rather: </strong>
+            <ul className='options'>
+              <li key='first'>
+                <input type='text' placeholder='Enter Option One Text Here' ref={ (e) => this.firstOption = e }/>
+              </li>
+              <li key='second'>
+                <input type='text' placeholder='Enter Option Two Text Here' ref={ (e) => this.secondOption = e }/>
+              </li>
+            </ul>
 
 
-          <button onClick={ (e) => this.onSubmitNewQuestion(e) }> Submit </button>
+            <button onClick={ (e) => this.onSubmitNewQuestion(e) }> Submit </button>
+          </div>
         </div>
-      </div>
+      </LoginWindow>
     )
   }
 }

@@ -2,12 +2,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { setAuthedUser } from "../actions/authedUser"
+import { withRouter } from 'react-router-dom'
 
 class LoginWindow extends Component {
 
   state = {
     selectedUserId: ''
   }
+
 
   onLogin = (e) => {
     e.preventDefault()
@@ -20,12 +22,14 @@ class LoginWindow extends Component {
   }
 
   render() {
-    const { users } = this.props
-    return (
+    const { users, authedUser } = this.props
+    return authedUser === '' ? (
       <div>
         <div className='center'>
           <h3> Welcome to the Would You Rather App!</h3>
-          <p> Please Sign in to Continue. </p>
+          <p> Please Sign in to Continue
+            { this.props.children === undefined ? null : <span style={{ color: 'red' }}>  to the Requested Page  </span> }.
+          </p>
         </div>
 
         <form onSubmit={ (e) => this.onLogin(e) }>
@@ -38,12 +42,12 @@ class LoginWindow extends Component {
           </div>
         </form>
       </div>
-    )
+    ) : this.props.children
   }
 }
 
-const mapStateToProps = ({ users }) => {
-  return { users }
+const mapStateToProps = ({ users, authedUser }) => {
+  return { users, authedUser }
 }
 
-export default connect(mapStateToProps)(LoginWindow)
+export default withRouter(connect(mapStateToProps)(LoginWindow))

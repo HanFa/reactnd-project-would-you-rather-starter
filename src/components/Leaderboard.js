@@ -2,19 +2,10 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from "react-router"
 import { CanvasJSChart } from '../canvasjs.react'
+import LoginWindow from "./LoginWindow"
 
 
 class Leaderboard extends Component {
-
-  componentDidMount() {
-    const { authedUser, history } = this.props
-    if (authedUser === '') {
-      alert("Please log in first to checkout the leaderboard!")
-      history.push('/')
-    }
-
-
-  }
 
   render() {
     const { rankedUsers } = this.props
@@ -51,24 +42,26 @@ class Leaderboard extends Component {
 
 
     return (
-      <div>
-        <h3 className='center'> Leader Board </h3>
-        {
-          rankedUsers.map((user, idx) => (
-              <div key={ user.id } className='center' >
-                <div className='container'>
-                  <img className='avatar' src={ user.avatarURL } alt="avatar" />
-                  <div> { `#${ idx + 1 }: ` } { user.name  } </div>
-                  <div> Question answered: { Object.keys(user.answers).length } </div>
-                  <div> Question asked: { user.questions.length } </div>
-                  <div> Total score: { user.questions.length + Object.keys(user.answers).length } </div>
-                  <CanvasJSChart options = { options(user.name, Object.keys(user.answers).length, user.questions.length) } />
+      <LoginWindow>
+        <div>
+          <h3 className='center'> Leader Board </h3>
+          {
+            rankedUsers.map((user, idx) => (
+                <div key={ user.id } className='center' >
+                  <div className='container'>
+                    <img className='avatar' src={ user.avatarURL } alt="avatar" />
+                    <div> { `#${ idx + 1 }: ` } { user.name  } </div>
+                    <div> Question answered: { Object.keys(user.answers).length } </div>
+                    <div> Question asked: { user.questions.length } </div>
+                    <div> Total score: { user.questions.length + Object.keys(user.answers).length } </div>
+                    <CanvasJSChart options = { options(user.name, Object.keys(user.answers).length, user.questions.length) } />
+                  </div>
                 </div>
-              </div>
+              )
             )
-          )
-        }
-      </div>
+          }
+        </div>
+      </LoginWindow>
     )
   }
 }

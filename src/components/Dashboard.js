@@ -2,41 +2,39 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from "react-router"
 import Question from "./Question"
-
+import { Tab, Tabs } from 'react-bootstrap'
 
 class Dashboard extends Component {
 
   onShowPollClicked = (e, qid) => {
-    this.props.history.push(`/question/${ qid }`)
+    this.props.history.push(`/questions/${ qid }`)
   }
-
 
 
   render() {
     const { answered, unanswered } = this.props
+
     return (
-      <div>
-        <h3 className='center'> Unanswered </h3>
-        <div className='card-columns'>
-          {
-            unanswered.map((qid) =>
-              <Question key={ qid } id={ qid } onShowPollClicked={ this.onShowPollClicked }/>
-            )
-          }
-        </div>
-
-        <hr/>
-        <h3 className='center'> Answered </h3>
-        <div className='card-columns'>
-        {
-          answered.map((qid) =>
-            <Question key={ qid } id={ qid } onShowPollClicked={ this.onShowPollClicked }/>
-          )
-        }
-        </div>
-
-
-      </div>
+      <Tabs defaultActiveKey="non-answered" id="uncontrolled-tab-example">
+        <Tab eventKey="non-answered" title="Not Answered">
+          <div className='card-columns container'>
+            {
+              unanswered.map((qid) =>
+                <Question key={ qid } id={ qid } onShowPollClicked={ this.onShowPollClicked }/>
+              )
+            }
+          </div>
+        </Tab>
+        <Tab eventKey="answered" title="Answered">
+          <div className='card-columns container'>
+            {
+              answered.map((qid) =>
+                <Question key={ qid } id={ qid } onShowPollClicked={ this.onShowPollClicked }/>
+              )
+            }
+          </div>
+        </Tab>
+      </Tabs>
     )
   }
 }
