@@ -38,7 +38,7 @@ class LoginWindow extends Component {
             { Object.entries(users).map(([id, values]) => ( <option key={ id }> { id }  </option> )) }
           </select>
           <div className='center'>
-            <button className="btn btn-success">  Sign in  </button>
+            <button className="btn btn-outline-dark">  Sign in  </button>
           </div>
         </form>
       </div>
